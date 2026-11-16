@@ -1,194 +1,566 @@
+/* =================================
+   GLOBAL SETTINGS
+================================= */
+
 :root {
-    --wa-green: #00a884;
-    --wa-green-hover: #008f72;
-    --wa-bg: #ffffff;
-    --wa-text: #111b21;
-    --wa-secondary: #667781;
-    --wa-border: #00a884;
-    --wa-border-inactive: #8696a0;
+    --green: #239b70;
+    --dark-green: #287f63;
+    --text: #60666a;
+    --border: #707579;
+    --white: #ffffff;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: var(--wa-bg);
-    color: var(--wa-text);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 100vh;
+* {
     margin: 0;
-    padding: 16px 24px;
+    padding: 0;
     box-sizing: border-box;
 }
 
-.form-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 90vh;
+html {
     width: 100%;
-    max-width: 420px;
+    min-height: 100%;
 }
 
-.wrapper {
+body {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    font-family: Roboto, Arial, sans-serif;
+
+    background: #ffffff;
+    color: #171b1d;
+
+    overflow-x: hidden;
 }
 
-.header-top {
+
+/* =================================
+   MAIN APPLICATION
+================================= */
+
+.app {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    font-size: 22px;
-    color: var(--wa-text);
-    margin-bottom: 20px;
-}
+    max-width: 600px;
 
-h2 {
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 8px;
-    text-align: center;
-    color: var(--wa-text);
-}
+    min-height: 100vh;
+    min-height: 100dvh;
 
-.instructions {
-    font-size: 14px;
-    color: var(--wa-secondary);
-    line-height: 1.4;
-    text-align: center;
-    margin-bottom: 32px;
-}
-
-.phone-highlight {
-    color: var(--wa-text);
-    font-weight: 600;
-}
-
-.help-link, .edit-link {
-    color: var(--wa-green);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.step-view {
-    display: none;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-}
-.step-view.active {
-    display: flex;
-}
-
-.input-group-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.select-wrapper {
-    border-bottom: 2px solid var(--wa-border);
-    padding-bottom: 4px;
-    width: 60%;
     margin: 0 auto;
-    text-align: center;
+
+    position: relative;
+
+    background: var(--white);
+
+    padding-bottom: 110px;
 }
 
-select {
-    background: transparent;
-    border: none;
-    color: var(--wa-green);
-    font-size: 16px;
-    font-weight: 500;
-    text-align: center;
-    width: 100%;
-    outline: none;
-    cursor: pointer;
+
+/* =================================
+   HEADER
+================================= */
+
+.topbar {
+
+    height: 64px;
+
+    padding: 0 22px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
 }
+
+.back-button,
+.menu-button {
+
+    border: none;
+
+    background: transparent;
+
+    color: #171b1d;
+
+    font-size: 35px;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+}
+
+.menu-button {
+    font-size: 32px;
+}
+
+
+/* =================================
+   CONTENT
+================================= */
+
+.content {
+
+    width: 90%;
+
+    max-width: 520px;
+
+    margin: 0 auto;
+
+    text-align: center;
+
+}
+
+h1 {
+
+    color: var(--text);
+
+    font-size: clamp(27px, 5vw, 35px);
+
+    font-weight: 400;
+
+    line-height: 1.3;
+
+    margin-top: 50px;
+
+    margin-bottom: 28px;
+
+}
+
+.description {
+
+    color: #666c70;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+}
+
+.text-link {
+
+    color: var(--dark-green);
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+}
+
+
+/* =================================
+   PHONE FORM
+================================= */
+
+#phoneForm {
+
+    width: 100%;
+
+    margin-top: 50px;
+
+}
+
+.country-wrapper {
+
+    width: 85%;
+
+    margin: 0 auto 25px;
+
+    text-align: left;
+
+    border-bottom: 2px solid #48a987;
+
+}
+
+.country-wrapper label,
+.dial-code-wrapper label,
+.phone-input-wrapper label,
+.otp-wrapper label {
+
+    display: block;
+
+    color: #777d80;
+
+    font-size: 12px;
+
+    margin-bottom: 5px;
+
+}
+
+.country-wrapper select {
+
+    width: 100%;
+
+    height: 40px;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-size: 20px;
+
+    color: #171b1d;
+
+    cursor: pointer;
+
+}
+
+
+/* =================================
+   PHONE NUMBER INPUT
+================================= */
 
 .phone-row {
+
+    width: 85%;
+
+    margin: 0 auto;
+
     display: flex;
-    gap: 12px;
-    margin-top: 10px;
-    align-items: flex-end;
+
+    gap: 20px;
+
 }
 
-.cc-input {
-    width: 70px;
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid var(--wa-border-inactive);
-    color: var(--wa-text);
-    font-size: 16px;
-    text-align: center;
-    padding-bottom: 6px;
-    outline: none;
+.dial-code-wrapper {
+
+    width: 27%;
+
+    border-bottom: 2px solid #48a987;
+
 }
 
 .phone-input-wrapper {
-    border-bottom: 2px solid var(--wa-border);
-    padding-bottom: 2px;
+
+    flex: 1;
+
+    border-bottom: 3px solid #39a77e;
+
 }
 
-input[type="tel"] {
-    background: transparent;
+.dial-code-wrapper input,
+.phone-input-wrapper input {
+
+    width: 100%;
+
+    height: 40px;
+
     border: none;
-    color: var(--wa-text);
-    font-size: 16px;
-    padding: 6px 0;
+
     outline: none;
+
+    background: transparent;
+
+    font-size: 21px;
+
+    color: #222;
+
+}
+
+.phone-input-wrapper input::placeholder {
+
+    color: #777d80;
+
+}
+
+
+/* =================================
+   OTP FORM
+================================= */
+
+.otp-content h1 {
+
+    margin-top: 60px;
+
+}
+
+.otp-content strong {
+
+    color: #171b1d;
+
+}
+
+#otpForm {
+
+    margin-top: 40px;
+
+}
+
+.otp-wrapper {
+
+    width: 85%;
+
+    margin: 0 auto;
+
+    text-align: left;
+
+    border-bottom: 2px solid #48a987;
+
+}
+
+.otp-input {
+
     width: 100%;
-}
 
-input[type="tel"]::placeholder {
-    color: var(--wa-secondary);
-}
+    height: 60px;
 
-/* Split 6-Box OTP Layout Styles */
-.otp-grid {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 24px;
-}
+    border: none;
 
-/* Single OTP Field Layout Styles */
-.single-otp-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 24px;
-    width: 100%;
-}
+    outline: none;
 
-.single-otp-input {
-    width: 220px;
-    height: 52px;
-    font-size: 26px;
-    font-weight: 600;
-    letter-spacing: 12px;
+    background: transparent;
+
+    font-size: 25px;
+
+    letter-spacing: 8px;
+
+    color: #222;
+
     text-align: center;
-    background: transparent;
+
+}
+
+.otp-input:focus {
+
+    border-bottom: 2px solid var(--green);
+
+}
+
+.otp-input::placeholder {
+
+    font-size: 15px;
+
+    letter-spacing: normal;
+
+    color: #999;
+
+}
+
+
+/* =================================
+   BUTTON
+================================= */
+
+.primary-button {
+
+    position: absolute;
+
+    bottom: 35px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 89%;
+
+    max-width: 530px;
+
+    height: 65px;
+
     border: none;
-    border-bottom: 2px solid var(--wa-border);
-    color: var(--wa-text);
-    outline: none;
-    transition: all 0.2s ease;
+
+    border-radius: 40px;
+
+    background: #e9eded;
+
+    color: #aeb4b6;
+
+    font-size: 19px;
+
+    font-weight: 500;
+
 }
 
-.single-otp-input::placeholder {
-    letter-spacing: 12px;
-    color: var(--wa-secondary);
-    opacity: 0.6;
+.primary-button:enabled {
+
+    background: var(--green);
+
+    color: white;
+
+    cursor: pointer;
+
 }
 
-.single-otp-input:focus {
-    border-bottom-color: var(--wa-green);
+
+/* =================================
+   ERROR MESSAGE
+================================= */
+
+.error-message {
+
+    color: #b3261e;
+
+    font-size: 13px;
+
+    margin-top: 12px;
+
+    min-height: 18px;
+
+}
+
+.demo-notice {
+
+    font-size: 12px;
+
+    color: #858b8e;
+
+    margin-top: 20px;
+
+}
+
+
+/* =================================
+   BOTTOM NAVIGATION
+================================= */
+
+.bottom-bar {
+
+    position: fixed;
+
+    bottom: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 24px;
+
+    background: #f6f7f8;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+.bottom-bar span {
+
+    width: 34%;
+
+    max-width: 225px;
+
+    height: 5px;
+
+    border-radius: 10px;
+
+    background: #b8babc;
+
+}
+
+
+/* =================================
+   TABLET RESPONSIVENESS
+================================= */
+
+@media (min-width: 600px) {
+
+    .app {
+
+        border-left: 1px solid #eeeeee;
+
+        border-right: 1px solid #eeeeee;
+
+    }
+
+    .content {
+
+        width: 85%;
+
+    }
+
+}
+
+
+/* =================================
+   SMALL MOBILE
+================================= */
+
+@media (max-width: 360px) {
+
+    h1 {
+
+        font-size: 25px;
+
+        margin-top: 35px;
+
+    }
+
+    .description {
+
+        font-size: 14px;
+
+    }
+
+    .phone-row,
+    .country-wrapper,
+    .otp-wrapper {
+
+        width: 92%;
+
+    }
+
+    .primary-button {
+
+        height: 58px;
+
+        font-size: 17px;
+
+    }
+
+}
+
+
+/* =================================
+   LANDSCAPE
+================================= */
+
+@media (orientation: landscape) and (max-height: 500px) {
+
+    h1 {
+
+        margin-top: 20px;
+
+    }
+
+    .primary-button {
+
+        position: relative;
+
+        left: auto;
+
+        bottom: auto;
+
+        transform: none;
+
+        display: block;
+
+        margin: 35px auto;
+
+    }
+
+}
+
+
+/* =================================
+   SAFE AREA SUPPORT
+================================= */
+
+@supports (padding: env(safe-area-inset-bottom)) {
+
+    .app {
+
+        padding-bottom: calc(110px + env(safe-area-inset-bottom));
+
+    }
+
+    .primary-button {
+
+        bottom: calc(35px + env(safe-area-inset-bottom));
+
+    }
+
 }
