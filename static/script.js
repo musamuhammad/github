@@ -1,566 +1,148 @@
-/* =================================
-   GLOBAL SETTINGS
-================================= */
+document.addEventListener("DOMContentLoaded", function () {
 
-:root {
-    --green: #239b70;
-    --dark-green: #287f63;
-    --text: #60666a;
-    --border: #707579;
-    --white: #ffffff;
-}
+    /*
+    =====================================
+    PHONE NUMBER PAGE
+    =====================================
+    */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    const phoneForm = document.getElementById("phoneForm");
 
-html {
-    width: 100%;
-    min-height: 100%;
-}
+    if (phoneForm) {
 
-body {
-    width: 100%;
-    min-height: 100vh;
-    min-height: 100dvh;
+        const country = document.getElementById("country");
+        const dialCode = document.getElementById("dialCode");
+        const phoneNumber = document.getElementById("phoneNumber");
+        const nextButton = document.getElementById("nextButton");
+        const phoneError = document.getElementById("phoneError");
 
-    font-family: Roboto, Arial, sans-serif;
 
-    background: #ffffff;
-    color: #171b1d;
+        // Update country calling code
 
-    overflow-x: hidden;
-}
+        country.addEventListener("change", function () {
 
+            const selected =
+                country.options[country.selectedIndex];
 
-/* =================================
-   MAIN APPLICATION
-================================= */
+            dialCode.value = selected.dataset.code;
 
-.app {
-    width: 100%;
-    max-width: 600px;
+        });
 
-    min-height: 100vh;
-    min-height: 100dvh;
 
-    margin: 0 auto;
+        // Allow numeric input only
 
-    position: relative;
+        phoneNumber.addEventListener("input", function () {
 
-    background: var(--white);
+            phoneNumber.value =
+                phoneNumber.value.replace(/\D/g, "");
 
-    padding-bottom: 110px;
-}
+            nextButton.disabled =
+                phoneNumber.value.length < 7;
 
+            phoneError.textContent = "";
 
-/* =================================
-   HEADER
-================================= */
+        });
 
-.topbar {
 
-    height: 64px;
+        // Handle phone form submission
 
-    padding: 0 22px;
+        phoneForm.addEventListener("submit", function (event) {
 
-    display: flex;
+            event.preventDefault();
 
-    justify-content: space-between;
-    align-items: center;
+            if (!phoneForm.checkValidity()) {
 
-}
+                phoneError.textContent =
+                    "Please enter a valid phone number.";
 
-.back-button,
-.menu-button {
+                return;
 
-    border: none;
+            }
 
-    background: transparent;
+            const number =
+                dialCode.value + " " + phoneNumber.value;
 
-    color: #171b1d;
+            // Local demonstration only
 
-    font-size: 35px;
+            sessionStorage.setItem(
+                "demoPhoneNumber",
+                number
+            );
 
-    cursor: pointer;
+            window.location.href = "otp.html";
 
-    text-decoration: none;
-
-}
-
-.menu-button {
-    font-size: 32px;
-}
-
-
-/* =================================
-   CONTENT
-================================= */
-
-.content {
-
-    width: 90%;
-
-    max-width: 520px;
-
-    margin: 0 auto;
-
-    text-align: center;
-
-}
-
-h1 {
-
-    color: var(--text);
-
-    font-size: clamp(27px, 5vw, 35px);
-
-    font-weight: 400;
-
-    line-height: 1.3;
-
-    margin-top: 50px;
-
-    margin-bottom: 28px;
-
-}
-
-.description {
-
-    color: #666c70;
-
-    font-size: 16px;
-
-    line-height: 1.6;
-
-}
-
-.text-link {
-
-    color: var(--dark-green);
-
-    font-weight: 700;
-
-    text-decoration: none;
-
-}
-
-
-/* =================================
-   PHONE FORM
-================================= */
-
-#phoneForm {
-
-    width: 100%;
-
-    margin-top: 50px;
-
-}
-
-.country-wrapper {
-
-    width: 85%;
-
-    margin: 0 auto 25px;
-
-    text-align: left;
-
-    border-bottom: 2px solid #48a987;
-
-}
-
-.country-wrapper label,
-.dial-code-wrapper label,
-.phone-input-wrapper label,
-.otp-wrapper label {
-
-    display: block;
-
-    color: #777d80;
-
-    font-size: 12px;
-
-    margin-bottom: 5px;
-
-}
-
-.country-wrapper select {
-
-    width: 100%;
-
-    height: 40px;
-
-    border: none;
-
-    outline: none;
-
-    background: transparent;
-
-    font-size: 20px;
-
-    color: #171b1d;
-
-    cursor: pointer;
-
-}
-
-
-/* =================================
-   PHONE NUMBER INPUT
-================================= */
-
-.phone-row {
-
-    width: 85%;
-
-    margin: 0 auto;
-
-    display: flex;
-
-    gap: 20px;
-
-}
-
-.dial-code-wrapper {
-
-    width: 27%;
-
-    border-bottom: 2px solid #48a987;
-
-}
-
-.phone-input-wrapper {
-
-    flex: 1;
-
-    border-bottom: 3px solid #39a77e;
-
-}
-
-.dial-code-wrapper input,
-.phone-input-wrapper input {
-
-    width: 100%;
-
-    height: 40px;
-
-    border: none;
-
-    outline: none;
-
-    background: transparent;
-
-    font-size: 21px;
-
-    color: #222;
-
-}
-
-.phone-input-wrapper input::placeholder {
-
-    color: #777d80;
-
-}
-
-
-/* =================================
-   OTP FORM
-================================= */
-
-.otp-content h1 {
-
-    margin-top: 60px;
-
-}
-
-.otp-content strong {
-
-    color: #171b1d;
-
-}
-
-#otpForm {
-
-    margin-top: 40px;
-
-}
-
-.otp-wrapper {
-
-    width: 85%;
-
-    margin: 0 auto;
-
-    text-align: left;
-
-    border-bottom: 2px solid #48a987;
-
-}
-
-.otp-input {
-
-    width: 100%;
-
-    height: 60px;
-
-    border: none;
-
-    outline: none;
-
-    background: transparent;
-
-    font-size: 25px;
-
-    letter-spacing: 8px;
-
-    color: #222;
-
-    text-align: center;
-
-}
-
-.otp-input:focus {
-
-    border-bottom: 2px solid var(--green);
-
-}
-
-.otp-input::placeholder {
-
-    font-size: 15px;
-
-    letter-spacing: normal;
-
-    color: #999;
-
-}
-
-
-/* =================================
-   BUTTON
-================================= */
-
-.primary-button {
-
-    position: absolute;
-
-    bottom: 35px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: 89%;
-
-    max-width: 530px;
-
-    height: 65px;
-
-    border: none;
-
-    border-radius: 40px;
-
-    background: #e9eded;
-
-    color: #aeb4b6;
-
-    font-size: 19px;
-
-    font-weight: 500;
-
-}
-
-.primary-button:enabled {
-
-    background: var(--green);
-
-    color: white;
-
-    cursor: pointer;
-
-}
-
-
-/* =================================
-   ERROR MESSAGE
-================================= */
-
-.error-message {
-
-    color: #b3261e;
-
-    font-size: 13px;
-
-    margin-top: 12px;
-
-    min-height: 18px;
-
-}
-
-.demo-notice {
-
-    font-size: 12px;
-
-    color: #858b8e;
-
-    margin-top: 20px;
-
-}
-
-
-/* =================================
-   BOTTOM NAVIGATION
-================================= */
-
-.bottom-bar {
-
-    position: fixed;
-
-    bottom: 0;
-
-    left: 0;
-
-    width: 100%;
-
-    height: 24px;
-
-    background: #f6f7f8;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-}
-
-.bottom-bar span {
-
-    width: 34%;
-
-    max-width: 225px;
-
-    height: 5px;
-
-    border-radius: 10px;
-
-    background: #b8babc;
-
-}
-
-
-/* =================================
-   TABLET RESPONSIVENESS
-================================= */
-
-@media (min-width: 600px) {
-
-    .app {
-
-        border-left: 1px solid #eeeeee;
-
-        border-right: 1px solid #eeeeee;
+        });
 
     }
 
-    .content {
 
-        width: 85%;
+    /*
+    =====================================
+    OTP DEMONSTRATION PAGE
+    =====================================
+    */
 
-    }
+    const otpForm = document.getElementById("otpForm");
 
-}
+    if (otpForm) {
 
+        const otpInput =
+            document.getElementById("verificationCode");
 
-/* =================================
-   SMALL MOBILE
-================================= */
+        const verifyButton =
+            document.getElementById("verifyButton");
 
-@media (max-width: 360px) {
+        const otpError =
+            document.getElementById("otpError");
 
-    h1 {
-
-        font-size: 25px;
-
-        margin-top: 35px;
-
-    }
-
-    .description {
-
-        font-size: 14px;
-
-    }
-
-    .phone-row,
-    .country-wrapper,
-    .otp-wrapper {
-
-        width: 92%;
-
-    }
-
-    .primary-button {
-
-        height: 58px;
-
-        font-size: 17px;
-
-    }
-
-}
+        const displayPhone =
+            document.getElementById("displayPhone");
 
 
-/* =================================
-   LANDSCAPE
-================================= */
+        // Display demonstration phone number
 
-@media (orientation: landscape) and (max-height: 500px) {
+        displayPhone.textContent =
+            sessionStorage.getItem("demoPhoneNumber") || "your number";
 
-    h1 {
 
-        margin-top: 20px;
+        // Numeric input validation
 
-    }
+        otpInput.addEventListener("input", function () {
 
-    .primary-button {
+            otpInput.value = otpInput.value
+                .replace(/\D/g, "")
+                .slice(0, 6);
 
-        position: relative;
+            verifyButton.disabled =
+                otpInput.value.length !== 6;
 
-        left: auto;
+            otpError.textContent = "";
 
-        bottom: auto;
+        });
 
-        transform: none;
 
-        display: block;
+        // Handle OTP form submission
 
-        margin: 35px auto;
+        otpForm.addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+            if (!otpForm.checkValidity()) {
+
+                otpError.textContent =
+                    "Enter a six-digit demonstration code.";
+
+                return;
+
+            }
+
+            otpError.style.color = "#287f63";
+
+            otpError.textContent =
+                "Demonstration completed successfully.";
+
+        });
 
     }
 
-}
-
-
-/* =================================
-   SAFE AREA SUPPORT
-================================= */
-
-@supports (padding: env(safe-area-inset-bottom)) {
-
-    .app {
-
-        padding-bottom: calc(110px + env(safe-area-inset-bottom));
-
-    }
-
-    .primary-button {
-
-        bottom: calc(35px + env(safe-area-inset-bottom));
-
-    }
-
-}
+});
