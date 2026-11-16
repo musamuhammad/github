@@ -6,6 +6,7 @@
 
     <title>Phone Verification Demo</title>
 
+    <!-- FIXED: Added leading slash -->
     <link rel="stylesheet" href="/static/style.css">
 </head>
 
@@ -76,10 +77,11 @@
 
                     <label for="phoneNumber">Phone number</label>
 
+                    <!-- FIXED: Changed name to phone_number -->
                     <input
                         type="tel"
                         id="phoneNumber"
-                        name="phoneNumber"
+                        name="phone_number"
                         placeholder="Phone number"
                         inputmode="numeric"
                         autocomplete="tel-national"
@@ -93,11 +95,11 @@
 
             <p id="phoneError" class="error-message"></p>
 
+            <!-- FIXED: Removed 'disabled' -->
             <button
                 type="submit"
                 id="nextButton"
                 class="primary-button"
-                disabled
             >
                 Next
             </button>
@@ -112,6 +114,7 @@
 
 </div>
 
+<!-- FIXED: Added leading slash -->
 <script src="/static/script.js"></script>
 
 </body>
