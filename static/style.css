@@ -1,74 +1,205 @@
-* { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-
-body { 
-    background-color: #ffffff; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    height: 100vh; 
-    margin: 0; 
+:root {
+    --wa-green: #00a884;
+    --wa-green-hover: #008f72;
+    --wa-bg: #111b21;
+    --wa-surface: #202c33;
+    --wa-text: #e9edef;
+    --wa-secondary: #8696a0;
+    --wa-border: #374248;
 }
 
-.login-container { 
-    width: 100%; 
-    max-width: 400px; 
-    padding: 40px 20px; 
-    text-align: center; 
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--wa-bg);
+    color: var(--wa-text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
+    margin: 0;
+    padding: 24px;
+    box-sizing: border-box;
 }
 
-.logo { 
-    width: 80px; 
-    height: 80px;
-    margin-bottom: 20px; 
-    fill: #00a884; /* WhatsApp Green */
+.wrapper {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
 }
 
-h2 { 
-    font-size: 22px; 
-    font-weight: 500; 
-    color: #41525d; 
-    margin-bottom: 10px; 
+h2 {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    text-align: center;
 }
 
-p { 
-    font-size: 14px; 
-    color: #8696a0; 
-    margin-bottom: 30px; 
+.instructions {
+    font-size: 14px;
+    color: var(--wa-secondary);
     line-height: 1.5;
+    text-align: center;
+    margin-bottom: 32px;
 }
 
-.input-group { 
-    margin-bottom: 20px; 
-    text-align: left; 
+.phone-highlight {
+    color: var(--wa-text);
+    font-weight: 600;
 }
 
-input { 
-    width: 100%; 
-    padding: 12px; 
-    border: 1px solid #ccc; 
-    border-radius: 8px; 
-    font-size: 16px; 
+.edit-link {
+    color: var(--wa-green);
+    text-decoration: none;
+    margin-left: 4px;
+}
+.edit-link:hover {
+    text-decoration: underline;
+}
+
+.step-view {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+.step-view.active {
+    display: flex;
+}
+
+.input-group-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.select-wrapper, .phone-input-wrapper {
+    background: var(--wa-surface);
+    border: 1px solid var(--wa-border);
+    border-radius: 8px;
+    padding: 4px 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.select-wrapper label, .phone-input-wrapper label {
+    font-size: 11px;
+    color: var(--wa-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 4px;
+}
+
+select, input[type="tel"] {
+    background: transparent;
+    border: none;
+    color: var(--wa-text);
+    font-size: 16px;
+    padding: 8px 0;
     outline: none;
-    transition: border-color 0.2s;
+    width: 100%;
 }
 
-input:focus { 
-    border-color: #00a884; 
+select option {
+    background: var(--wa-surface);
+    color: var(--wa-text);
 }
 
-button { 
-    width: 100%; 
-    padding: 12px; 
-    background-color: #00a884; 
-    color: white; 
-    border: none; 
-    border-radius: 24px; 
-    font-size: 16px; 
-    font-weight: 500; 
-    cursor: pointer; 
-    transition: background-color 0.2s;
+.phone-row {
+    display: flex;
+    gap: 10px;
 }
 
-button:hover { 
-    background-color: #008f6f; 
+.cc-input {
+    width: 75px;
+    background: var(--wa-surface);
+    border: 1px solid var(--wa-border);
+    border-radius: 8px;
+    color: var(--wa-text);
+    font-size: 16px;
+    text-align: center;
+    outline: none;
+}
+.cc-input:focus, select:focus, input[type="tel"]:focus {
+    border-color: var(--wa-green);
+}
+
+.otp-grid {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.otp-input {
+    width: 46px;
+    height: 54px;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    background: var(--wa-surface);
+    border: 1px solid var(--wa-border);
+    border-radius: 8px;
+    color: var(--wa-text);
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.otp-input:focus {
+    border-color: var(--wa-green);
+    box-shadow: 0 0 0 1px var(--wa-green);
+}
+
+.resend-container {
+    font-size: 14px;
+    color: var(--wa-secondary);
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.resend-link {
+    color: var(--wa-green);
+    text-decoration: none;
+    font-weight: 500;
+}
+.resend-link.disabled {
+    color: var(--wa-secondary);
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.action-container {
+    width: 100%;
+    max-width: 420px;
+    padding-bottom: 12px;
+}
+
+.btn-next {
+    width: 100%;
+    background-color: var(--wa-green);
+    color: #ffffff;
+    border: none;
+    padding: 14px;
+    border-radius: 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, opacity 0.2s;
+}
+
+.btn-next:disabled {
+    background-color: var(--wa-surface);
+    color: var(--wa-secondary);
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.btn-next:not(:disabled):hover {
+    background-color: var(--wa-green-hover);
 }
