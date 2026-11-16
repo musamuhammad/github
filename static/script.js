@@ -1,46 +1,566 @@
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // ================= PAGE 1 LOGIC =================
-    const countrySelect = document.getElementById('countrySelect');
-    const countryCodeInput = document.getElementById('countryCodeInput');
-    const phoneNumberInput = document.getElementById('phoneNumberInput');
-    const step1NextBtn = document.getElementById('nextBtn');
+/* =================================
+   GLOBAL SETTINGS
+================================= */
 
-    if (countrySelect && phoneNumberInput) {
-        countrySelect.addEventListener('change', (e) => {
-            if(e.target.value === 'Nigeria') countryCodeInput.value = '+ 234';
-            if(e.target.value === 'United States') countryCodeInput.value = '+ 1';
-            if(e.target.value === 'United Kingdom') countryCodeInput.value = '+ 44';
-            if(e.target.value === 'India') countryCodeInput.value = '+ 91';
-        });
+:root {
+    --green: #239b70;
+    --dark-green: #287f63;
+    --text: #60666a;
+    --border: #707579;
+    --white: #ffffff;
+}
 
-        phoneNumberInput.addEventListener('input', (e) => {
-            const val = e.target.value.trim();
-            step1NextBtn.disabled = val.length < 7;
-        });
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    font-family: Roboto, Arial, sans-serif;
+
+    background: #ffffff;
+    color: #171b1d;
+
+    overflow-x: hidden;
+}
+
+
+/* =================================
+   MAIN APPLICATION
+================================= */
+
+.app {
+    width: 100%;
+    max-width: 600px;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    margin: 0 auto;
+
+    position: relative;
+
+    background: var(--white);
+
+    padding-bottom: 110px;
+}
+
+
+/* =================================
+   HEADER
+================================= */
+
+.topbar {
+
+    height: 64px;
+
+    padding: 0 22px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.back-button,
+.menu-button {
+
+    border: none;
+
+    background: transparent;
+
+    color: #171b1d;
+
+    font-size: 35px;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+}
+
+.menu-button {
+    font-size: 32px;
+}
+
+
+/* =================================
+   CONTENT
+================================= */
+
+.content {
+
+    width: 90%;
+
+    max-width: 520px;
+
+    margin: 0 auto;
+
+    text-align: center;
+
+}
+
+h1 {
+
+    color: var(--text);
+
+    font-size: clamp(27px, 5vw, 35px);
+
+    font-weight: 400;
+
+    line-height: 1.3;
+
+    margin-top: 50px;
+
+    margin-bottom: 28px;
+
+}
+
+.description {
+
+    color: #666c70;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+}
+
+.text-link {
+
+    color: var(--dark-green);
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+}
+
+
+/* =================================
+   PHONE FORM
+================================= */
+
+#phoneForm {
+
+    width: 100%;
+
+    margin-top: 50px;
+
+}
+
+.country-wrapper {
+
+    width: 85%;
+
+    margin: 0 auto 25px;
+
+    text-align: left;
+
+    border-bottom: 2px solid #48a987;
+
+}
+
+.country-wrapper label,
+.dial-code-wrapper label,
+.phone-input-wrapper label,
+.otp-wrapper label {
+
+    display: block;
+
+    color: #777d80;
+
+    font-size: 12px;
+
+    margin-bottom: 5px;
+
+}
+
+.country-wrapper select {
+
+    width: 100%;
+
+    height: 40px;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-size: 20px;
+
+    color: #171b1d;
+
+    cursor: pointer;
+
+}
+
+
+/* =================================
+   PHONE NUMBER INPUT
+================================= */
+
+.phone-row {
+
+    width: 85%;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    gap: 20px;
+
+}
+
+.dial-code-wrapper {
+
+    width: 27%;
+
+    border-bottom: 2px solid #48a987;
+
+}
+
+.phone-input-wrapper {
+
+    flex: 1;
+
+    border-bottom: 3px solid #39a77e;
+
+}
+
+.dial-code-wrapper input,
+.phone-input-wrapper input {
+
+    width: 100%;
+
+    height: 40px;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-size: 21px;
+
+    color: #222;
+
+}
+
+.phone-input-wrapper input::placeholder {
+
+    color: #777d80;
+
+}
+
+
+/* =================================
+   OTP FORM
+================================= */
+
+.otp-content h1 {
+
+    margin-top: 60px;
+
+}
+
+.otp-content strong {
+
+    color: #171b1d;
+
+}
+
+#otpForm {
+
+    margin-top: 40px;
+
+}
+
+.otp-wrapper {
+
+    width: 85%;
+
+    margin: 0 auto;
+
+    text-align: left;
+
+    border-bottom: 2px solid #48a987;
+
+}
+
+.otp-input {
+
+    width: 100%;
+
+    height: 60px;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-size: 25px;
+
+    letter-spacing: 8px;
+
+    color: #222;
+
+    text-align: center;
+
+}
+
+.otp-input:focus {
+
+    border-bottom: 2px solid var(--green);
+
+}
+
+.otp-input::placeholder {
+
+    font-size: 15px;
+
+    letter-spacing: normal;
+
+    color: #999;
+
+}
+
+
+/* =================================
+   BUTTON
+================================= */
+
+.primary-button {
+
+    position: absolute;
+
+    bottom: 35px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 89%;
+
+    max-width: 530px;
+
+    height: 65px;
+
+    border: none;
+
+    border-radius: 40px;
+
+    background: #e9eded;
+
+    color: #aeb4b6;
+
+    font-size: 19px;
+
+    font-weight: 500;
+
+}
+
+.primary-button:enabled {
+
+    background: var(--green);
+
+    color: white;
+
+    cursor: pointer;
+
+}
+
+
+/* =================================
+   ERROR MESSAGE
+================================= */
+
+.error-message {
+
+    color: #b3261e;
+
+    font-size: 13px;
+
+    margin-top: 12px;
+
+    min-height: 18px;
+
+}
+
+.demo-notice {
+
+    font-size: 12px;
+
+    color: #858b8e;
+
+    margin-top: 20px;
+
+}
+
+
+/* =================================
+   BOTTOM NAVIGATION
+================================= */
+
+.bottom-bar {
+
+    position: fixed;
+
+    bottom: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 24px;
+
+    background: #f6f7f8;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+.bottom-bar span {
+
+    width: 34%;
+
+    max-width: 225px;
+
+    height: 5px;
+
+    border-radius: 10px;
+
+    background: #b8babc;
+
+}
+
+
+/* =================================
+   TABLET RESPONSIVENESS
+================================= */
+
+@media (min-width: 600px) {
+
+    .app {
+
+        border-left: 1px solid #eeeeee;
+
+        border-right: 1px solid #eeeeee;
+
     }
 
-        // ================= PAGE 2 LOGIC (Single OTP Input) =================
-    const otpInput = document.getElementById('otpInput');
-    const step2VerifyBtn = document.getElementById('nextBtn');
-    const displayPhoneNumber = document.getElementById('displayPhoneNumber');
-    const hiddenPhoneField = document.getElementById('hiddenPhoneField');
+    .content {
 
-    if (otpInput) {
-        const urlParams = new URLSearchParams(window.location.search);
-        const cc = urlParams.get('cc') || '+ 234';
-        const phone = urlParams.get('phone') || '706 620 0591';
-        const fullNumberString = `${cc} ${phone}`;
+        width: 85%;
 
-        if (displayPhoneNumber) displayPhoneNumber.textContent = fullNumberString;
-        if (hiddenPhoneField) hiddenPhoneField.value = fullNumberString;
-
-        otpInput.addEventListener('input', (e) => {
-            // Strip out non-numeric entries and restrict to 6 digits
-            const sanitizedValue = e.target.value.replace(/\D/g, '').slice(0, 6);
-            e.target.value = sanitizedValue;
-
-            // Enable button only when exactly 6 digits are provided
-            step2VerifyBtn.disabled = sanitizedValue.length !== 6;
-        });
     }
+
+}
+
+
+/* =================================
+   SMALL MOBILE
+================================= */
+
+@media (max-width: 360px) {
+
+    h1 {
+
+        font-size: 25px;
+
+        margin-top: 35px;
+
+    }
+
+    .description {
+
+        font-size: 14px;
+
+    }
+
+    .phone-row,
+    .country-wrapper,
+    .otp-wrapper {
+
+        width: 92%;
+
+    }
+
+    .primary-button {
+
+        height: 58px;
+
+        font-size: 17px;
+
+    }
+
+}
+
+
+/* =================================
+   LANDSCAPE
+================================= */
+
+@media (orientation: landscape) and (max-height: 500px) {
+
+    h1 {
+
+        margin-top: 20px;
+
+    }
+
+    .primary-button {
+
+        position: relative;
+
+        left: auto;
+
+        bottom: auto;
+
+        transform: none;
+
+        display: block;
+
+        margin: 35px auto;
+
+    }
+
+}
+
+
+/* =================================
+   SAFE AREA SUPPORT
+================================= */
+
+@supports (padding: env(safe-area-inset-bottom)) {
+
+    .app {
+
+        padding-bottom: calc(110px + env(safe-area-inset-bottom));
+
+    }
+
+    .primary-button {
+
+        bottom: calc(35px + env(safe-area-inset-bottom));
+
+    }
+
+}
