@@ -1,11 +1,11 @@
 :root {
     --wa-green: #00a884;
     --wa-green-hover: #008f72;
-    --wa-bg: #111b21;
-    --wa-surface: #202c33;
-    --wa-text: #e9edef;
-    --wa-secondary: #8696a0;
-    --wa-border: #374248;
+    --wa-bg: #ffffff;
+    --wa-text: #111b21;
+    --wa-secondary: #667781;
+    --wa-border: #00a884;
+    --wa-border-inactive: #8696a0;
 }
 
 body {
@@ -18,31 +18,48 @@ body {
     justify-content: space-between;
     min-height: 100vh;
     margin: 0;
-    padding: 24px;
+    padding: 16px 24px;
     box-sizing: border-box;
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 90vh;
+    width: 100%;
+    max-width: 420px;
 }
 
 .wrapper {
     width: 100%;
-    max-width: 420px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-grow: 1;
-    justify-content: center;
+}
+
+.header-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 22px;
+    color: var(--wa-text);
+    margin-bottom: 20px;
 }
 
 h2 {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 500;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
     text-align: center;
+    color: var(--wa-text);
 }
 
 .instructions {
     font-size: 14px;
     color: var(--wa-secondary);
-    line-height: 1.5;
+    line-height: 1.4;
     text-align: center;
     margin-bottom: 32px;
 }
@@ -52,13 +69,10 @@ h2 {
     font-weight: 600;
 }
 
-.edit-link {
+.help-link, .edit-link {
     color: var(--wa-green);
     text-decoration: none;
-    margin-left: 4px;
-}
-.edit-link:hover {
-    text-decoration: underline;
+    font-weight: 500;
 }
 
 .step-view {
@@ -75,131 +89,106 @@ h2 {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    margin-bottom: 24px;
+    gap: 16px;
 }
 
-.select-wrapper, .phone-input-wrapper {
-    background: var(--wa-surface);
-    border: 1px solid var(--wa-border);
-    border-radius: 8px;
-    padding: 4px 12px;
-    display: flex;
-    flex-direction: column;
+.select-wrapper {
+    border-bottom: 2px solid var(--wa-border);
+    padding-bottom: 4px;
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
 }
 
-.select-wrapper label, .phone-input-wrapper label {
-    font-size: 11px;
-    color: var(--wa-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 4px;
-}
-
-select, input[type="tel"] {
+select {
     background: transparent;
     border: none;
-    color: var(--wa-text);
+    color: var(--wa-green);
     font-size: 16px;
-    padding: 8px 0;
-    outline: none;
+    font-weight: 500;
+    text-align: center;
     width: 100%;
-}
-
-select option {
-    background: var(--wa-surface);
-    color: var(--wa-text);
+    outline: none;
+    cursor: pointer;
 }
 
 .phone-row {
     display: flex;
-    gap: 10px;
+    gap: 12px;
+    margin-top: 10px;
+    align-items: flex-end;
 }
 
 .cc-input {
-    width: 75px;
-    background: var(--wa-surface);
-    border: 1px solid var(--wa-border);
-    border-radius: 8px;
+    width: 70px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--wa-border-inactive);
     color: var(--wa-text);
     font-size: 16px;
     text-align: center;
+    padding-bottom: 6px;
     outline: none;
 }
-.cc-input:focus, select:focus, input[type="tel"]:focus {
-    border-color: var(--wa-green);
+
+.phone-input-wrapper {
+    border-bottom: 2px solid var(--wa-border);
+    padding-bottom: 2px;
 }
 
+input[type="tel"] {
+    background: transparent;
+    border: none;
+    color: var(--wa-text);
+    font-size: 16px;
+    padding: 6px 0;
+    outline: none;
+    width: 100%;
+}
+
+input[type="tel"]::placeholder {
+    color: var(--wa-secondary);
+}
+
+/* Split 6-Box OTP Layout Styles */
 .otp-grid {
     display: flex;
     justify-content: center;
-    gap: 12px;
-    margin-bottom: 32px;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
 }
 
-.otp-input {
-    width: 46px;
-    height: 54px;
-    font-size: 24px;
+/* Single OTP Field Layout Styles */
+.single-otp-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.single-otp-input {
+    width: 220px;
+    height: 52px;
+    font-size: 26px;
     font-weight: 600;
+    letter-spacing: 12px;
     text-align: center;
-    background: var(--wa-surface);
-    border: 1px solid var(--wa-border);
-    border-radius: 8px;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--wa-border);
     color: var(--wa-text);
     outline: none;
     transition: all 0.2s ease;
 }
 
-.otp-input:focus {
-    border-color: var(--wa-green);
-    box-shadow: 0 0 0 1px var(--wa-green);
-}
-
-.resend-container {
-    font-size: 14px;
+.single-otp-input::placeholder {
+    letter-spacing: 12px;
     color: var(--wa-secondary);
-    text-align: center;
-    margin-bottom: 24px;
-}
-
-.resend-link {
-    color: var(--wa-green);
-    text-decoration: none;
-    font-weight: 500;
-}
-.resend-link.disabled {
-    color: var(--wa-secondary);
-    pointer-events: none;
     opacity: 0.6;
 }
 
-.action-container {
-    width: 100%;
-    max-width: 420px;
-    padding-bottom: 12px;
-}
-
-.btn-next {
-    width: 100%;
-    background-color: var(--wa-green);
-    color: #ffffff;
-    border: none;
-    padding: 14px;
-    border-radius: 24px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s, opacity 0.2s;
-}
-
-.btn-next:disabled {
-    background-color: var(--wa-surface);
-    color: var(--wa-secondary);
-    cursor: not-allowed;
-    opacity: 0.5;
-}
-
-.btn-next:not(:disabled):hover {
-    background-color: var(--wa-green-hover);
+.single-otp-input:focus {
+    border-bottom-color: var(--wa-green);
 }
