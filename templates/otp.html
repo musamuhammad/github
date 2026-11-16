@@ -1,46 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhatsApp Verification - Step 2</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Code Verification Demo</title>
+
     <link rel="stylesheet" href="static/style.css">
+
 </head>
+
 <body>
 
-    <form action="/success" method="POST" class="form-wrapper" id="step2Form">
-        <div class="wrapper">
-            <div class="step-view active">
-                <div class="header-top">
-                    <span class="close-icon">&times;</span>
-                    <span class="menu-icon">&#8942;</span>
-                </div>
-                <h2>Verifying your number</h2>
-                <div class="instructions" style="margin-bottom: 24px;">
-                    SMS sent to <span class="phone-highlight" id="displayPhoneNumber">+234 706 620 0591[span_0](start_span)[span_0](end_span)</span>. 
-                    <a href="/" class="edit-link">Wrong number?</a>
-                </div>
+<div class="app">
 
-                <!-- Hidden input to carry forward the phone string via form post/get -->
-                <input type="hidden" id="hiddenPhoneField" name="full_phone" value="">
+    <header class="topbar">
 
-                <!-- Single OTP Field Container -->
-                <div class="single-otp-container">
-                    <input type="text" class="single-otp-input" id="otpInput" name="otp" maxlength="6" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" placeholder="------" required autofocus>
-                </div>
+        <a href="/" class="back-button">←</a>
 
-                <div class="resend-container">
-                    <a href="#" class="resend-link" id="resendBtn">Didn't receive code?</a>
-                </div>
+        <button class="menu-button" type="button">
+            ⋮
+        </button>
+
+    </header>
+
+
+    <main class="content otp-content">
+
+        <h1>Verifying your number</h1>
+
+        <p class="description">
+
+            A demonstration verification code was requested for
+
+            <strong id="displayPhone">your number</strong>.
+
+            <a href="/" class="text-link">
+                Change number
+            </a>
+
+        </p>
+
+
+        <form action="/success" method="POST" id="otpForm">
+
+            <div class="otp-wrapper">
+
+                <label for="verificationCode">
+                    Verification code
+                </label>
+
+                <input
+                    type="text"
+                    id="verificationCode"
+                    name="verificationCode"
+                    class="otp-input"
+                    placeholder="Enter 6-digit code"
+                    maxlength="6"
+                    minlength="6"
+                    inputmode="numeric"
+                    autocomplete="off"
+                    pattern="[0-9]{6}"
+                    required
+                >
+
             </div>
-        </div>
 
-        <!-- Persistent Bottom Action Button -->
-        <div class="action-container">
-            <button type="submit" class="btn-next" id="nextBtn" disabled>Verify</button>
-        </div>
-    </form>
+            <p id="otpError" class="error-message"></p>
 
-    <script src="static/script.js"></script>
+            <button
+                type="submit"
+                id="verifyButton"
+                class="primary-button"
+                disabled
+            >
+                Continue
+            </button>
+
+            <p class="demo-notice">
+                Independent frontend demonstration.
+                No real verification codes are collected.
+            </p>
+
+        </form>
+
+    </main>
+
+
+    <footer class="bottom-bar">
+        <span></span>
+    </footer>
+
+</div>
+
+<script src="js/otp.js"></script>
+
 </body>
 </html>
