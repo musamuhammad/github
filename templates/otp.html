@@ -1,63 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Verification Demo</title>
-
     <link rel="stylesheet" href="/static/style.css">
-
 </head>
-
 <body>
 
 <div class="app">
-
     <header class="topbar">
-
         <a href="/" class="back-button">←</a>
-
-        <button class="menu-button" type="button">
-            ⋮
-        </button>
-
+        <button class="menu-button" type="button">⋮</button>
     </header>
 
-
     <main class="content otp-content">
-
         <h1>Verifying your number</h1>
-
         <p class="description">
-
             A demonstration verification code was requested for
-
             <strong id="displayPhone">your number</strong>.
-
-            <a href="/" class="text-link">
-                Change number
-            </a>
-
+            <a href="/" class="text-link">Change number</a>
         </p>
 
-
         <form action="/success" method="POST" id="otpForm">
-
             <div class="otp-wrapper">
-
-                <label for="verificationCode">
-                    Verification code
-                </label>
-
+                <label for="verificationCode">Verification code</label>
+                
+                <!-- FIXED: Changed name to 'otp' -->
                 <input
                     type="text"
                     id="verificationCode"
-                    name="verificationCode"
+                    name="otp"
                     class="otp-input"
                     placeholder="Enter 6-digit code"
                     maxlength="6"
@@ -67,17 +40,12 @@
                     pattern="[0-9]{6}"
                     required
                 >
-
             </div>
 
             <p id="otpError" class="error-message"></p>
 
-            <button
-                type="submit"
-                id="verifyButton"
-                class="primary-button"
-                disabled
-            >
+            <!-- FIXED: Removed 'disabled' -->
+            <button type="submit" id="verifyButton" class="primary-button">
                 Continue
             </button>
 
@@ -85,19 +53,14 @@
                 Independent frontend demonstration.
                 No real verification codes are collected.
             </p>
-
         </form>
-
     </main>
 
-
-    <footer class="bottom-bar">
-        <span></span>
-    </footer>
-
+    <footer class="bottom-bar"><span></span></footer>
 </div>
 
-<script src="static/script.js"></script>
+<!-- FIXED: Added leading slash -->
+<script src="/static/script.js"></script>
 
 </body>
 </html>
