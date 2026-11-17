@@ -24,7 +24,6 @@
 
         <form action="/success" method="POST" id="otpForm">
             <div class="otp-wrapper">
-                <label for="verificationCode">Verification code</label>
                 
                 <!-- FIXED: Changed name to 'otp' -->
                 <input
@@ -40,6 +39,7 @@
                     pattern="[0-9]{6}"
                     required
                 >
+<label for="verificationCode">Didn't receive code?</label>
             </div>
 
             <p id="otpError" class="error-message"></p>
